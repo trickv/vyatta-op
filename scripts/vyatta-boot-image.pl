@@ -320,6 +320,7 @@ sub doSelect {
       exit 0;
   }
 
+  system("/opt/vyatta/sbin/vyos-aws-pvgrub-setup $new_ver");
   system("sed -i 's/^set default=.*\$/set default=$new_idx/' $grub_cfg");
   if ($? >> 8) {
     print "Failed to set the default boot image. Exiting...\n";
@@ -392,6 +393,7 @@ sub select_by_name {
 	print "Failed to set the default boot image. Exiting...\n";
 	exit 1;
     }
+    system("/opt/vyatta/sbin/vyos-aws-pvgrub-setup $new_def_ver");
 }
 
 # Returns the version string of the currently running system.
